@@ -357,10 +357,15 @@ private class ShelfHeaderFooterView: UICollectionReusableView {
     didSet {
       if let view = view {
         addSubview(view)
-        view.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        view.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        view.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        if #available(iOS 9.0, *) {
+          view.topAnchor.constraint(equalTo: topAnchor).isActive = true
+          view.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+          view.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+          view.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        } else {
+          // Fallback on earlier versions
+          print("Shelf header need to implement layout constraint on version early iOS9")
+        }
       }
     }
   }
